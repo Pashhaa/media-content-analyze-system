@@ -8,7 +8,7 @@
 ## ER-Model
 
 ### User
-
+```
 @startuml
 
 entity users <<ENTITY>> {
@@ -41,9 +41,9 @@ users "1,1" -- "0,*" questions
 users "1,1" - "0,*" reports
 
 @enduml
-
+```
 ### Media-content
-
+```
 @startuml
 
 entity media_contents <<ENTITY>> {
@@ -112,7 +112,7 @@ diagrams "1,1" -- "1,*" mass_media
 diagrams "1,1" -- "1,*" source
 
 @enduml
-
+```
 ## Relational Schema
 
 <p align="center">
