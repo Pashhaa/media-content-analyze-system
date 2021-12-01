@@ -116,7 +116,7 @@ diagrams "1,1" -- "1,*" source
 ## Relational Schema
 
 <p align="center">
-  <img src="./pictures/er_user.png" width="350" title="ER-diagrams">
+  <img src="./pictures/er_users.png" width="350" title="ER-diagrams">
   <img src="./pictures/er_media-content.png" width="350" title="ER-diagrams">
 </p>
 
