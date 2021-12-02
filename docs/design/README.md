@@ -11,7 +11,7 @@
 
 @startuml
 
-entity users <<ENTITY>> {
+entity user <<ENTITY>> {
 	id:INT
 	name:VARCHAR
 	email:VARCHAR
@@ -20,7 +20,7 @@ entity users <<ENTITY>> {
 	role:VARCHAR
 }
 
-entity reports <<ENTITY>> {
+entity report <<ENTITY>> {
     id:INT
     head:VARCHAR
     description:TEXT
@@ -29,7 +29,7 @@ entity reports <<ENTITY>> {
     id_user:INT
 }
 
-entity questions <<ENTITY>> {
+entity request <<ENTITY>> {
     id:INT
     data:TEXT
     date:DATETIME
@@ -46,80 +46,62 @@ users "1,1" - "0,*" reports
 
 @startuml
 
-entity media_contents <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    name VARCHAR
-    description VARCHAR
-}
+  entity Message <<ENTITY>> {
+  }
+  
+  entity Metadata {
+    key
+    value
+  }
+  
+  entity Source {
+    url: uri-reference
+  }
+  
+  entity ScraperType {
+    repo: uri-reference
+  }
+  
+  entity ScraperInstance {
+    endPoint: uri-reference
+  }
+  
+  entity Task {
+  
+  }
+  
+  entity ServiceType {
+    name
+    description
+    repo: uri-reference
+  }
 
-entity posts <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    hea` VARCHAR
-    data TEXT
-    id_media INT
-}
-
-entity movies <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    movie_link VARCHAR
-    id_post INT
-    id_media INT
-}
-
-entity pictures <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    picture_path VARCHAR
-    id_post INT
-    id_media INT
-}
-
-entity links <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    link VARCHAR
-    id_post INT
-    id_media INT
-}
-
-entity diagrams <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    name VARCHAR
-    data TEXT
-    id_media INT
-    id_post INT
-}
-
-entity mass_media <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    name VARCHAR
-    data TEXT
-    id_diagram INT
-}
-
-entity source <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT
-    name VARCHAR
-    data TEXT
-    id_diagram INT
-}
-
-media_contents "1,1" -- "0,*" diagrams
-media_contents "1,1" - "0,*" posts
-media_contents "1,1" -- "0,*" movies
-media_contents "1,1" - "0,*" pictures
-media_contents "1,1" -- "0,*" links
-posts "1,1" -- "0,*" diagrams
-posts "1,1" -- "0,*" movies
-posts "1,1" -- "0,*" pictures
-posts "1,1" -- "0,*" links
-diagrams "1,1" -- "1,*" mass_media
-diagrams "1,1" -- "1,*" source
-
+  entity ServiceInstance {
+    endPoint: uri-reference
+  }
+  
+  ServiceInstance --> ServiceType
+  ServiceInstance -> ServiceInstance : next 
+  
+  
+  Source "0,*" --> "1,1" ScraperType 
+  ScraperInstance -u-> ScraperType
+  
+  Message -> ScraperInstance
+  
+  Metadata -> Message
+  
+  Task -> Source
+  Task -> ScraperInstance
+  
 @enduml
 
 ## Relational Schema
 
 <p align="center">
   <img src="./pictures/er_users.png" width="350" title="ER-diagrams">
+</p>
+<p align="center">
   <img src="./pictures/er_media-content.png" width="350" title="ER-diagrams">
 </p>
 
@@ -128,33 +110,35 @@ diagrams "1,1" -- "1,*" source
 ### Users
 
 ```sql
-CREATE TABLE users (
-  id INT PRIMARY KEY AUTO INCREMENT,
-  name VARCHAR(50),
-  email VARCHAR(50),
-  password VARCHAR(30),
-  photo VARCHAR(100),
-  role VARCHAR(20)
+
+CREATE TABLE `user` (
+  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `name` VARCHAR(50),
+  `email` VARCHAR(50),
+  `password` VARCHAR(30),
+  `photo` VARCHAR(100),
+  `role` VARCHAR(20)
 );
 
-CREATE TABLE reports (
-  id INT PRIMARY KEY AUTO INCREMENT,
-  head VARCHAR(50),
-  data TEXT,
-  date DATETIME,
-  status_active BIT,
-  id_user INT,
-  FOREIGN KEY (id_user) REFERENCES users(id)
+CREATE TABLE `request` (
+  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `data` TEXT,
+  `date` DATETIME,
+  `status_active` BIT,
+  `id_user` INT,
+  FOREIGN KEY (`id_user`) REFERENCES `user`(`id`)
 );
 
-CREATE TABLE questions (
-  id INT PRIMARY KEY AUTO INCREMENT,
-  data TEXT,
-  date DATETIME,
-  status_active BIT,
-  id_user INT,
-  FOREIGN KEY (id_user) REFERENCES users(id)
+CREATE TABLE `report` (
+  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `head` VARCHAR(50),
+  `data` TEXT,
+  `date` DATETIME,
+  `status_active` BIT,
+  `id_user` INT,
+  FOREIGN KEY (`id_user`) REFERENCES `user`(`id`)
 );
+
 ```
 
 ### Media-content

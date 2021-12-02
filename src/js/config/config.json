@@ -1,0 +1,12 @@
+{
+    "configServer": {
+        "PORT": 3000
+    },
+    "dbConfig": {
+        "dbName": "test",
+        "userName": "root",
+        "dbPassword": "password",
+        "dialect": "mysql",
+        "host": "localhost"
+    }
+}
