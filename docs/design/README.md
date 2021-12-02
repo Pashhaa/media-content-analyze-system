@@ -47,56 +47,59 @@ users "1,1" - "0,*" reports
 @startuml
 
 entity media_contents <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    name VARCHAR,
+    id INT PRIMARY KEY AUTO INCREMENT
+    name VARCHAR
     description VARCHAR
 }
 
 entity posts <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    hea` VARCHAR,
-    data TEXT,
-    id_media INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    hea` VARCHAR
+    data TEXT
+    id_media INT
 }
 
 entity movies <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    movie_link VARCHAR,
-    id_post INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    movie_link VARCHAR
+    id_post INT
+    id_media INT
 }
 
 entity pictures <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    picture_path VARCHAR,
-    id_post INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    picture_path VARCHAR
+    id_post INT
+    id_media INT
 }
 
 entity links <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    link VARCHAR,
-    id_post INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    link VARCHAR
+    id_post INT
+    id_media INT
 }
 
 entity diagrams <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    name VARCHAR,
-    data TEXT,
-    id_media INT,
-    id_post INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    name VARCHAR
+    data TEXT
+    id_media INT
+    id_post INT
 }
 
 entity mass_media <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    name VARCHAR,
-    data text,
-    id_diagram INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    name VARCHAR
+    data TEXT
+    id_diagram INT
 }
 
 entity source <<ENTITY>> {
-    id INT PRIMARY KEY AUTO INCREMENT,
-    name VARCHAR,
-    data text,
-    id_diagram INT,
+    id INT PRIMARY KEY AUTO INCREMENT
+    name VARCHAR
+    data TEXT
+    id_diagram INT
 }
 
 media_contents "1,1" -- "0,*" diagrams
@@ -158,37 +161,30 @@ CREATE TABLE `questions` (
 
 ```
 CREATE TABLE `media_contents` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `id` INT PK AI,
   `name` VARCHAR(50),
   `description` VARCHAR(50)
 );
 
 CREATE TABLE `posts` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `id` INT PK AI,
   `head` VARCHAR(50),
   `data` TEXT,
   `id_media` INT,
   FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
 );
 
-CREATE TABLE `pictures` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `picture_path` VARCHAR(100),
+CREATE TABLE `movies` (
+  `id` INT PK AI,
+  `movie_link` VARCHAR(100),
   `id_post` INT,
+  `id_media` INT,
   FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
-  FOREIGN KEY (`id_post`) REFERENCES `media_contents`(`id`)
-);
-
-CREATE TABLE `links` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `link` VARCHAR(100),
-  `id_post` INT,
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
-  FOREIGN KEY (`id_post`) REFERENCES `media_contents`(`id`)
+  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
 );
 
 CREATE TABLE `diagrams` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `id` INT PK AI,
   `name` VARCHAR(50),
   `data` TEXT,
   `id_media` INT,
@@ -197,28 +193,38 @@ CREATE TABLE `diagrams` (
   FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`)
 );
 
-CREATE TABLE `source` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `name` VARCHAR(50),
-  `data` TEXT,
-  `id_diagram` INT,
-  FOREIGN KEY (`id_diagram`) REFERENCES `diagrams`(`id`)
-);
-
 CREATE TABLE `mass_media` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
+  `id` INT PK AI,
   `name` VARCHAR(50),
   `data` TEXT,
   `id_diagram` INT,
   FOREIGN KEY (`id_diagram`) REFERENCES `diagrams`(`id`)
 );
 
-CREATE TABLE `movies` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `movie_link` VARCHAR(100),
+CREATE TABLE `source` (
+  `id` INT PK AI,
+  `name` VARCHAR(50),
+  `data` TEXT,
+  `id_diagram` INT,
+  FOREIGN KEY (`id_diagram`) REFERENCES `diagrams`(`id`)
+);
+
+CREATE TABLE `links` (
+  `id` INT PK AI,
+  `link` VARCHAR(100),
   `id_post` INT,
-  FOREIGN KEY (`id_post`) REFERENCES `media_contents`(`id`),
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`)
+  `id_media` INT,
+  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
+  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
+);
+
+CREATE TABLE `pictures` (
+  `id` INT PK AI,
+  `picture_path` VARCHAR(100),
+  `id_post` INT,
+  `id_media` INT,
+  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
+  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
 );
 
 ```
