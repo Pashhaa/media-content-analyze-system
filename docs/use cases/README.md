@@ -6,11 +6,6 @@
 
 **Діаграма прецедентів**
 
-</center>
-```
-
-яка буде відображена наступним чином
-
 <center style="
     border-radius:4px;
     border: 1px solid #cfd7e6;
