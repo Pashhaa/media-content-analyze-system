@@ -128,103 +128,103 @@ diagrams "1,1" -- "1,*" source
 ### Users
 
 ```
-CREATE TABLE `users` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `name` VARCHAR(50),
-  `email` VARCHAR(50),
-  `password` VARCHAR(30),
-  `photo` VARCHAR(100),
-  `role` VARCHAR(20)
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO INCREMENT,
+  name VARCHAR(50),
+  email VARCHAR(50),
+  password VARCHAR(30),
+  photo VARCHAR(100),
+  role VARCHAR(20)
 );
 
-CREATE TABLE `reports` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `head` VARCHAR(50),
-  `data` TEXT,
-  `date` DATETIME,
-  `status_active` BIT,
-  `id_user` INT,
-  FOREIGN KEY (`id_user`) REFERENCES `users`(`id`)
+CREATE TABLE reports (
+  id INT PRIMARY KEY AUTO INCREMENT,
+  head VARCHAR(50),
+  data TEXT,
+  date DATETIME,
+  status_active BIT,
+  id_user INT,
+  FOREIGN KEY (id_user) REFERENCES users(id)
 );
 
-CREATE TABLE `questions` (
-  `id` INT PRIMARY KEY AUTO INCREMENT,
-  `data` TEXT,
-  `date` DATETIME,
-  `status_active` BIT,
-  `id_user` INT,
-  FOREIGN KEY (`id_user`) REFERENCES `users`(`id`)
+CREATE TABLE questions (
+  id INT PRIMARY KEY AUTO INCREMENT,
+  data TEXT,
+  date DATETIME,
+  status_active BIT,
+  id_user INT,
+  FOREIGN KEY (id_user) REFERENCES users(id)
 );
 ```
 
 ### Media-content
 
 ```
-CREATE TABLE `media_contents` (
-  `id` INT PK AI,
-  `name` VARCHAR(50),
-  `description` VARCHAR(50)
+CREATE TABLE media_contents (
+  id INT PK AI,
+  name VARCHAR(50),
+  description VARCHAR(50)
 );
 
-CREATE TABLE `posts` (
-  `id` INT PK AI,
-  `head` VARCHAR(50),
-  `data` TEXT,
-  `id_media` INT,
-  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
+CREATE TABLE posts (
+  id INT PK AI,
+  head VARCHAR(50),
+  data TEXT,
+  id_media INT,
+  FOREIGN KEY (id_media) REFERENCES media_contents(id)
 );
 
-CREATE TABLE `movies` (
-  `id` INT PK AI,
-  `movie_link` VARCHAR(100),
-  `id_post` INT,
-  `id_media` INT,
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
-  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
+CREATE TABLE movies (
+  id INT PK AI,
+  movie_link VARCHAR(100),
+  id_post INT,
+  id_media INT,
+  FOREIGN KEY (id_post) REFERENCES posts(id),
+  FOREIGN KEY (id_media) REFERENCES media_contents(id)
 );
 
-CREATE TABLE `diagrams` (
-  `id` INT PK AI,
-  `name` VARCHAR(50),
-  `data` TEXT,
-  `id_media` INT,
-  `id_post` INT,
-  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`),
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`)
+CREATE TABLE diagrams (
+  id INT PK AI,
+  name VARCHAR(50),
+  data TEXT,
+  id_media INT
+  id_post INT,
+  FOREIGN KEY (id_media) REFERENCES media_contents(id),
+  FOREIGN KEY (id_post) REFERENCES posts(id)
 );
 
-CREATE TABLE `mass_media` (
-  `id` INT PK AI,
-  `name` VARCHAR(50),
-  `data` TEXT,
-  `id_diagram` INT,
-  FOREIGN KEY (`id_diagram`) REFERENCES `diagrams`(`id`)
+CREATE TABLE mass_media (
+  id INT PK AI,
+  name VARCHAR(50),
+  data TEXT,
+  id_diagram INT,
+  FOREIGN KEY (id_diagram) REFERENCES diagrams(id)
 );
 
-CREATE TABLE `source` (
-  `id` INT PK AI,
-  `name` VARCHAR(50),
-  `data` TEXT,
-  `id_diagram` INT,
-  FOREIGN KEY (`id_diagram`) REFERENCES `diagrams`(`id`)
+CREATE TABLE source 
+  id INT PK AI,
+  name VARCHAR(50),
+  data TEXT,
+  id_diagram INT,
+  FOREIGN KEY (id_diagram) REFERENCES diagrams(id)
 );
 
-CREATE TABLE `links` (
-  `id` INT PK AI,
-  `link` VARCHAR(100),
-  `id_post` INT,
-  `id_media` INT,
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
-  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
+CREATE TABLE links (
+  id INT PK AI,
+  link VARCHAR(100),
+  id_post INT,
+  id_media INT,
+  FOREIGN KEY (id_post) REFERENCES posts(id),
+  FOREIGN KEY (id_media) REFERENCES media_contents(id)
 );
 
-CREATE TABLE `pictures` (
-  `id` INT PK AI,
-  `picture_path` VARCHAR(100),
-  `id_post` INT,
-  `id_media` INT,
-  FOREIGN KEY (`id_post`) REFERENCES `posts`(`id`),
-  FOREIGN KEY (`id_media`) REFERENCES `media_contents`(`id`)
+CREATE TABLE pictures (
+  id INT PK AI,
+  picture_path VARCHAR(100),
+  id_post INT
+  id_media INT,
+  FOREIGN KEY (id_post) REFERENCES posts(id),
+  FOREIGN KEY (id_media) REFERENCES media_contents(id)
 );
 
 ```
