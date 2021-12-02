@@ -127,7 +127,7 @@ diagrams "1,1" -- "1,*" source
 
 ### Users
 
-```
+```sql
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
@@ -159,7 +159,7 @@ CREATE TABLE questions (
 
 ### Media-content
 
-```
+```sql
 CREATE TABLE media_contents (
   id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
