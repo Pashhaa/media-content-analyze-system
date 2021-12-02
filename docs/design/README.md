@@ -161,13 +161,13 @@ CREATE TABLE questions (
 
 ```
 CREATE TABLE media_contents (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
   description VARCHAR(50)
 );
 
 CREATE TABLE posts (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   head VARCHAR(50),
   data TEXT,
   id_media INT,
@@ -175,7 +175,7 @@ CREATE TABLE posts (
 );
 
 CREATE TABLE movies (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   movie_link VARCHAR(100),
   id_post INT,
   id_media INT,
@@ -184,7 +184,7 @@ CREATE TABLE movies (
 );
 
 CREATE TABLE diagrams (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
   data TEXT,
   id_media INT
@@ -194,7 +194,7 @@ CREATE TABLE diagrams (
 );
 
 CREATE TABLE mass_media (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
   data TEXT,
   id_diagram INT,
@@ -202,7 +202,7 @@ CREATE TABLE mass_media (
 );
 
 CREATE TABLE source 
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   name VARCHAR(50),
   data TEXT,
   id_diagram INT,
@@ -210,7 +210,7 @@ CREATE TABLE source
 );
 
 CREATE TABLE links (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   link VARCHAR(100),
   id_post INT,
   id_media INT,
@@ -219,7 +219,7 @@ CREATE TABLE links (
 );
 
 CREATE TABLE pictures (
-  id INT PK AI,
+  id INT PRIMARY KEY AUTO INCREMENT,
   picture_path VARCHAR(100),
   id_post INT
   id_media INT,
