@@ -7,100 +7,92 @@
 
 ## ER-Model
 
-### User
-
 @startuml
-
-entity user {
-	id:INT
-	name:VARCHAR
-	email:VARCHAR
-	password:VARCHAR
-	photo:VARCHAR
-	role:VARCHAR
-}
-
-entity report {
-    id:INT
-    head:VARCHAR
-    description:TEXT
-    date:DATETIME
-    status_active:BIT
-    id_user:INT
-}
-
-entity question {
-    id:INT
-    data:TEXT
-    date:DATETIME
-    status_active:BIT
-    id_user:INT
-}
-
-question "0,*" --> "1,1" user
-report "0,*" --> "1,1" user
-
-@enduml
-
-### Media-content
-
-@startuml
-
-  entity Billing {
-    description
+  entity User {
+    id: int
+    name: text
+    login: text
+    password: text
+  }
+  
+  entity DataStreamDashBoard { 
+    id: int    
+    name: text 
+    description: text 
+    entryPoint: int 
+  }
+  
+  entity DataStreamService { 
+    id: int    
+    name: text 
+    description: text 
+    entryPoint: int 
+  }
+  
+  entity Dashboard {
+   id: int
+   type: text
   }
 
   entity Message {
-  data
+    data: text
   }
   
   entity Metadata {
-    key
-    value
+    id: int
+    key: int
+    value: text
   }
   
   entity Source {
+    id: int
     url: uri-reference
+    api-key: int
   }
   
   entity ScraperType {
+    type: text
     repo: uri-reference
   }
   
   entity ScraperInstance {
+    id: int
+    data: text
     endPoint: uri-reference
   }
   
   entity Task {
-    data
+    id: int
+    data: text
   }
   
   entity ServiceType {
-    name
-    description
+    id: int
+    type: text
+    description: text
     repo: uri-reference
   }
 
   entity ServiceInstance {
+    id: int
+    name: text
     endPoint: uri-reference
   }
   
-  ServiceInstance "0,*" --> "1,1" ServiceType
-  ServiceInstance "1,1" -> "1,1" ServiceInstance : next 
-  
-  
-  Source "0,*" --> "1,1" ScraperType 
-  ScraperInstance "0,*" --> "1,1" ScraperType
-  
-  Message "0,*" --> "1,1" ScraperInstance
-  
-  Metadata "1, 1" --> "1, 1" Message
-  
-  Task "0, *" --> "1,1" Source
-  Task "0, *" -> "1,1" ScraperInstance
+  User "1, 1" -- "0, *" Dashboard
+  Dashboard "1, 1" -- "0, *" DataStreamDashBoard
+  ServiceType "1, 1" -- "0, *" ServiceInstance
+  ServiceInstance "1, 1" -- "0, *" DataStreamService
+  Task "1, 1" -- "0, *" DataStreamDashBoard
+  Task "1, 1" -- "0, *" DataStreamService
+  Task "1, 1" -- "0, *" Source
+  Task "1, 1" -- "0, *" ScraperInstance
+  Source "1, 1" -- "0, *" ScraperType
+  ScraperType "1, 1" -- "0, *" ScraperInstance
+  ScraperInstance "1, 1" - "0, *" Message
+  Message "1, 1" - "0, *" Metadata
   
 @enduml
-
 
 ## Relational Schema
 
