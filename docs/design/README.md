@@ -11,7 +11,7 @@
 
 @startuml
 
-entity user <<ENTITY>> {
+entity user {
 	id:INT
 	name:VARCHAR
 	email:VARCHAR
@@ -20,7 +20,7 @@ entity user <<ENTITY>> {
 	role:VARCHAR
 }
 
-entity report <<ENTITY>> {
+entity report {
     id:INT
     head:VARCHAR
     description:TEXT
@@ -29,7 +29,7 @@ entity report <<ENTITY>> {
     id_user:INT
 }
 
-entity request <<ENTITY>> {
+entity question {
     id:INT
     data:TEXT
     date:DATETIME
@@ -37,8 +37,8 @@ entity request <<ENTITY>> {
     id_user:INT
 }
 
-users "1,1" -- "0,*" questions
-users "1,1" - "0,*" reports
+question "0,*" --> "1,1" user
+report "0,*" --> "1,1" user
 
 @enduml
 
@@ -46,7 +46,12 @@ users "1,1" - "0,*" reports
 
 @startuml
 
-  entity Message <<ENTITY>> {
+  entity Billing {
+    description
+  }
+
+  entity Message {
+  data
   }
   
   entity Metadata {
@@ -67,7 +72,7 @@ users "1,1" - "0,*" reports
   }
   
   entity Task {
-  
+    data
   }
   
   entity ServiceType {
@@ -80,21 +85,22 @@ users "1,1" - "0,*" reports
     endPoint: uri-reference
   }
   
-  ServiceInstance --> ServiceType
-  ServiceInstance -> ServiceInstance : next 
+  ServiceInstance "0,*" --> "1,1" ServiceType
+  ServiceInstance "1,1" -> "1,1" ServiceInstance : next 
   
   
   Source "0,*" --> "1,1" ScraperType 
-  ScraperInstance -u-> ScraperType
+  ScraperInstance "0,*" --> "1,1" ScraperType
   
-  Message -> ScraperInstance
+  Message "0,*" --> "1,1" ScraperInstance
   
-  Metadata -> Message
+  Metadata "1, 1" --> "1, 1" Message
   
-  Task -> Source
-  Task -> ScraperInstance
+  Task "0, *" --> "1,1" Source
+  Task "0, *" -> "1,1" ScraperInstance
   
 @enduml
+
 
 ## Relational Schema
 
