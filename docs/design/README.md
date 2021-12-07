@@ -84,14 +84,14 @@
   Task "1, 1" -- "0, *" ScraperInstance
   Source "1, 1" -- "0, *" ScraperType
   ScraperType "1, 1" -- "0, *" ScraperInstance
-  ScraperInstance "1, 1" - "0, *" Message
-  ScraperInstance "1, 1" - "1, 1" ScraperInstance : next
-  Message "1, 1" - "0, *" Metadata
+  ScraperInstance "1, 1" -- "0, *" Message
+  ScraperInstance "1, 1" - "1, 1" ScraperInstance
+  Message "1, 1" -- "0, *" Metadata
   
 @enduml
 
 ## Relational Schema
 
 <p align="center">
-  <img src="./pictures/er_diagram.png" width="350" title="ER-diagram">
+  <img src="./pictures/er-diagram.png" width="600" title="ER-diagram">
 </p>
