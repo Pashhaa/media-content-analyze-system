@@ -6,12 +6,12 @@
   entity User
   entity User.id
   entity User.name
-  entity User.login
+  entity User.email
   entity User.password
 
   User *-- User.id
   User *-- User.name
-  User *-- User.login
+  User *-- User.email
   User *-- User.password
 
   entity Dashboard
@@ -134,7 +134,7 @@
   entity User {
     id: int
     name: text
-    login: text
+    email: text
     password: text
   }
   
@@ -158,6 +158,7 @@
   }
 
   entity Message {
+    id: int
     data: text
   }
   
@@ -174,6 +175,7 @@
   }
   
   entity ScraperType {
+    id: int
     type: text
     repo: uri-reference
   }
