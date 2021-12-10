@@ -1,3 +1,5 @@
+'use strict';
+
 const Sequelize = require('sequelize');
 
 function data_stream_dashboard(sequelize) {
@@ -10,10 +12,9 @@ function data_stream_dashboard(sequelize) {
         task_id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            allowNull: false, 
+            allowNull: false,
         },
-    }, 
-    {
+    }, {
         timestamps: false,
         tableName: "data_stream_dashboard"
     })
