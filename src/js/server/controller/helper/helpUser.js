@@ -1,14 +1,14 @@
-const {user} = require('../../../db/connection.js');
+const { user } = require('../../../db/connection.js');
 
 async function createUsr(data) {
-    await positions.create(data)
+    await user.create(data)
     .then((res) => console.log('Position created succesfully!'))
     .catch((err) => console.error(`Error create position -> ${err}`));
     return;
 }
 
 async function getUsr(id) {
-    const res = await positions.findAll({
+    const res = await user.findAll({
         where: {
             "id": id,
         }
@@ -21,7 +21,7 @@ async function getUsr(id) {
 }
 
 async function updateUsr(id, data) {
-    const res = await positions.findAll({
+    const res = await user.findAll({
         where: {
             "id": id,
         }
@@ -29,7 +29,7 @@ async function updateUsr(id, data) {
     .catch((err) => console.error(`Error check exists user -> ${err}`));
 
     if(res.length !== 0) {
-        await positions.update({data}, {
+        await user.update({data}, {
             where: {
                 "id": id,
             }
@@ -43,7 +43,7 @@ async function updateUsr(id, data) {
 }
 
 async function removeUsr(id) {
-    const res = await positions.findAll({
+    const res = await user.findAll({
         where: {
             "id": id,
         }
@@ -51,7 +51,7 @@ async function removeUsr(id) {
     .catch((err) => console.error(`Error check exists position -> ${err}`));
 
     if(res.length !== 0) {
-        await positions.destroy({
+        await user.destroy({
             where: {
                 "id": id,
             }
