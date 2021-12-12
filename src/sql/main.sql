@@ -257,3 +257,43 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+--------------------------------------------------------
+-- Data for table `mydb`.`user`
+--------------------------------------------------------
+
+START TRANSACTION;
+
+USE `mydb`;
+
+INSERT INTO `mydb`.`user` (`id`, `name`, `email`, `password`) VALUES (DEFAULT, 'ervin', 'e@gmail.com', 'passw123');
+INSERT INTO `mydb`.`user` (`id`, `name`, `email`, `password`) VALUES (DEFAULT, 'andrey', 'a@gmail.com', 'passw321');
+
+COMMIT;
+
+-------------------------------------------------------
+-- Data for table `mydb`.`task`
+-------------------------------------------------------
+
+START TRANSACTION;
+
+USE `mydb`;
+
+INSERT INTO `mydb`.`task` (`id`, `data`) VALUES (DEFAULT, 'KPI');
+INSERT INTO `mydb`.`task` (`id`, `data`) VALUES (DEFAULT, 'Monobank');
+
+COMMIT;
+
+-------------------------------------------------------
+-- Data for table `mydb`.`source`
+-------------------------------------------------------
+
+START TRANSACTION;
+
+USE `mydb`;
+
+INSERT INTO `mydb`.`source` (`id`, `url`, `api_key`, `task_id`) VALUES (DEFAULT, 'https://university.ua', 'AZdsdadWEqweWQEQWEQds', DEFAULT);
+INSERT INTO `mydb`.`source` (`id`, `url`, `api_key`, `task_id`) VALUES (DEFAULT, 'https://bank.ua', 'AZdsdEwerwweWQEQWEQds', DEFAULT);
+
+COMMIT;
+

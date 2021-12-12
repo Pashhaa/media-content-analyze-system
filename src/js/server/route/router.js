@@ -6,7 +6,7 @@ const router = Router();
 router.post('/user', createUser);
 router.put('/user/:id', updateUser);
 router.delete('/user/:id', removeUser);
-router.get('/user/:id', removeUser);
+router.get('/user/:id', getUserById);
 
 router.get('*', errorFoundPage);
 

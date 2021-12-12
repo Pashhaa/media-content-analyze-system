@@ -1,5 +1,5 @@
 'use strict';
-const { createUsr, getUsr, updateUsr, deleteUsr } = require('./helpers/helpUser.js');
+const { createUsr, getUsr, updateUsr, deleteUsr } = require('./helper/helpUser.js');
 
 async function createUser(req, res) {
     try {
